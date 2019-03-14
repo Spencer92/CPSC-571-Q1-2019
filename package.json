@@ -15,7 +15,8 @@
     "merge-descriptors": "^1.0.1",
     "mysql": "^2.16.0",
     "node.js": "^0.0.0",
-    "sql-template-strings": "^2.2.2"
+    "sql-template-strings": "^2.2.2",
+    "sqlite3": "^4.0.6"
   },
   "devDependencies": {},
   "scripts": {
