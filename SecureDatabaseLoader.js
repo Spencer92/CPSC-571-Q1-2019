@@ -34,3 +34,9 @@ async function main() {
 
   console.log(`Listening on port ${port}: http://localhost:${port}`);
 }*/
+
+//recieve single bit of information
+//use key _i_ to identify information
+//generate random number r_i
+//send (i,x(bar)_i = x_i (xor) r_i) to one site
+//send (i,r_i) to another site
