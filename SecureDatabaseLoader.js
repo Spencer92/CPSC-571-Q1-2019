@@ -1,9 +1,27 @@
 const sqlite3 = require('sqlite3').verbose();
 
-let securedb = new sqlite3.Database(':memory:', (err) => {
+
+var decoder = [];
+var position = [];
+var values = [];
+var max;
+
+
+let securedb = new sqlite3.Database('./securedb.db', (err) => {
   if(err)
   {
     return console.error(err.message);
+  }
+
+  values.push(req.securedb.get(SQL `SELECT data1, data2 FROM securedb WHERE data1 = (SELECT max(data1) FROM securedb)`));
+  max = req.securedb.get(SQL `SELECT data1, data2 FROM securedb WHERE data1 = (SELECT max(data1) FROM securedb)`);
+  for(var i = 0;
+    max != req.securedb.get(SQL `SELECT data1, data2 FROM securedb WHERE data1 = (SELECT min(data1) FROM securedb)`);
+  i++)
+  {
+    position.push(i);
+    decoder.push(Math.random());
+    max = req.securedb.get(SQL `SELECT data1, data2 FROM securedb WHERE data1 = (SELECT max(data1) FROM securedb WHERE data1 < (SELECT ${req.session.max}))`);
   }
 
   console.log('Connected to secure SQL Database');
@@ -24,7 +42,7 @@ securedb.close((err) => {
 });
 
 /*
-async function main() {
+async function main() {-
   const port = process.env.PORT || 3000;
   db = await sqlite.open('./db.sqlite', { cached: true, Promise }).then(db => db.migrate());
   app.listen(port);
