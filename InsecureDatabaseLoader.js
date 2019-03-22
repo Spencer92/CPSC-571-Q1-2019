@@ -1,34 +1,47 @@
-const sqlite3 = require('sqlite3').verbose();
-
-let securedb = new sqlite3.Database('./insecure.db', (err) => {
-  if (err) {
-    console.error(err.message);
-  }
-  console.log('Connected to the chinook database.');
-});
+//help from https://stackabuse.com/a-sqlite-tutorial-with-node-js/
 
 
-
-
-securedb.close((err) => {
+class ProjectRepository
+{
+  constructor(theData)
   {
-    if(err)
-    {
-      return console.error(err.message);
-    }
-    console.log('Closed insecure database');
+    this.theData = theData;
   }
 
-});
-//http://www.sqlitetutorial.net/sqlite-nodejs/
-/*
-async function main() {
-  const port = process.env.PORT || 3000;
-  db = await sqlite.open('./db.sqlite', { cached: true, Promise }).then(db => db.migrate());
-  app.listen(port);
+  createTable()
+  {
+    const sql = `CREATE TABLE IF NOT EXISTS userData (
+    id INTEGER PRIMARY KEY,
+    first_name TEXT,
+    last_name TEXT,
+    Age INTEGER,
+    gender TEXT,
+    Phone TEXT,
+    email TEXT,
+    City TEXT,
+    Username TEXT,
+    ip_address TEXT,
+    Language TEXT,
+    "CreditCardType" TEXT,
+    "CreditCardNumber" TEXT,
+    "BuyingFrequency" TEXT )
+    `;
 
-  // This query activates foreign constraints
-  await db.run(SQL`PRAGMA foreign_keys = ON`);
+    return this.theData.run(sql);
+  }
 
-  console.log(`Listening on port ${port}: http://localhost:${port}`);
-}*/
+  create(id, first_name, last_name, Age, gender, Phone,
+  email, City, Username, ip_address, Language,
+  CreditCardType, CreditCardNumber, BuyingFrequency)
+  {
+    return this.theData.run(
+      `INSERT INTO userData (id, first_name, last_name, Age,
+      gender, Phone, email, City, Username, ip_address,
+    Language, CreditCardType, CreditCardNumber, BuyingFrequency)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+    [id, first_name, last_name, Age,
+    gender, Phone, email, City, Username, ip_address,
+  Language, CreditCardType, CreditCardNumber, BuyingFrequency]
+    )
+  }
+}
