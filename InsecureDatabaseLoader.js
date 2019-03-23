@@ -1,7 +1,9 @@
 //help from https://stackabuse.com/a-sqlite-tutorial-with-node-js/
+const sqlite3 = require('sqlite3').verbose();
+const bluebird = require('bluebird');
 
 
-class ProjectRepository
+class dataRepository
 {
   constructor(theData)
   {
@@ -22,9 +24,9 @@ class ProjectRepository
     Username TEXT,
     ip_address TEXT,
     Language TEXT,
-    "CreditCardType" TEXT,
-    "CreditCardNumber" TEXT,
-    "BuyingFrequency" TEXT )
+    CreditCardType TEXT,
+    CreditCardNumber TEXT,
+    BuyingFrequency TEXT )
     `;
 
     return this.theData.run(sql);
@@ -51,7 +53,7 @@ class ProjectRepository
     gender, Phone, email, City, Username, ip_address,
   Language, CreditCardType, CreditCardNumber, BuyingFrequency } = userData;
   return this.theData.run(
-    `UPDATE theData
+    `UPDATE userData
     first_name = ?,
     last_name = ?,
     Age = ?,
@@ -79,4 +81,13 @@ class ProjectRepository
       [id]
     );
   }
+
+  getByID(id)
+  {
+    return this.theData.get(
+      `SELECT * FROM userData WHERE id = ?`
+      [id]
+      );
+  }
+
 }
