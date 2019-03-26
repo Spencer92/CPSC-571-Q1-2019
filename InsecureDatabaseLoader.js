@@ -13,8 +13,8 @@ class dataRepository
   createTable()
   {
     const sql = `CREATE TABLE IF NOT EXISTS userData (
-    id INTEGER PRIMARY KEY,
-    first_name TEXT,
+    id INTEGER PRIMARY KEY )`;//,
+/*    first_name TEXT;
     last_name TEXT,
     Age INTEGER,
     gender TEXT,
@@ -27,23 +27,23 @@ class dataRepository
     CreditCardType TEXT,
     CreditCardNumber TEXT,
     BuyingFrequency TEXT )
-    `;
+    `;*/
     return this.theData.run(sql);
   }
 
-  create(id, first_name, last_name, Age, gender, Phone,
+  create(id/*, first_name, last_name, Age, gender, Phone,
   email, City, Username, ip_address, Language,
-  CreditCardType, CreditCardNumber, BuyingFrequency)
+  CreditCardType, CreditCardNumber, BuyingFrequency*/)
   {
-    this.createTable();
+//    this.createTable();
     return this.theData.run(
-      `INSERT INTO userData (id, first_name, last_name, Age,
+      `INSERT INTO userData (id) VALUES (?)`/*, first_name, last_name, Age,
       gender, Phone, email, City, Username, ip_address,
     Language, CreditCardType, CreditCardNumber, BuyingFrequency)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-    [id, first_name, last_name, Age,
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,*/
+    [id]/*, first_name, last_name, Age,
     gender, Phone, email, City, Username, ip_address,
-  Language, CreditCardType, CreditCardNumber, BuyingFrequency]
+  Language, CreditCardType, CreditCardNumber, BuyingFrequency]*/
     )
   }
 

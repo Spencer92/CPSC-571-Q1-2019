@@ -22,10 +22,14 @@ class InsecureData
 
   run(sql, params = [])
   {
+    console.log('sql is ', sql, 'before return new bluebird');
     return new bluebird((resolve, reject) =>
     {
-      this.db.run(sql, params, function (err)
+      var newSql = sql;
+      console.log('sql is', newSql, 'before this.db.run');
+      this.db.run(newSql, params, function (err)
       {
+        console.log('sql is', newSql);
         if(!err)
         {
           resolve({ id: this.lastID });

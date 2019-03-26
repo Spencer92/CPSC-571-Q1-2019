@@ -23,8 +23,8 @@ function main()
     theData = line.split(",")
 //    console.log(theData[0]);
 //    console.log(theData[1]);
-    insecureRepo.create(parseInt(theData[0]), //id
-      theData[1].toString(), //first_name
+    insecureRepo.create(parseInt(theData[0])); //id
+/*      theData[1].toString(), //first_name
       theData[2].toString(), //last_name
       parseInt(theData[3]), //Age
       theData[4].toString(), //gender
@@ -36,8 +36,8 @@ function main()
       theData[10].toString(), //Language
       theData[11].toString(), //CreditCardType
       theData[12].toString(), //CreditCardNumber
-      theData[13].toString()); //BuyingFrequency
-      setTimeout(function(){}, 500);
+      theData[13].toString()); //BuyingFrequency*/
+//      setTimeout(function(){}, 500);
   });
 
   console.log('Before testDataSet \n');
