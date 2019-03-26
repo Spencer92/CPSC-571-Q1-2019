@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS data (
+CREATE TABLE IF NOT EXISTS userData (
 id INT PRIMARY KEY,
 first_name TEXT,
 last_name TEXT,
@@ -15,7 +15,7 @@ CreditCardNumber TEXT,
 BuyingFrequency TEXT
 );
 
-INSERT INTO data VALUES
+INSERT INTO userData VALUES
 (1,"Janela","Iredell",25,"Female","619-219-7895","jiredell0@addthis.com","Tuplice","jiredell0","186.163.159.205","Arabic","jcb","3561985575262214","Once"),
 (2,"Delcina","Izhakov",23,"Female","752-206-6199","dizhakov1@nyu.edu","Raofeng","dizhakov1","110.116.24.137","Hungarian","jcb","3573620655687669","Daily"),
 (3,"Ingaberg","Gurnell",50,"Female","737-676-3799","igurnell2@opera.com","Balboa","igurnell2","33.186.71.239","Kyrgyz","diners-club-enroute","201470029690890","Once"),
