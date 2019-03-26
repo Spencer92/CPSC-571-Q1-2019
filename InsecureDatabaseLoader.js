@@ -28,7 +28,6 @@ class dataRepository
     CreditCardNumber TEXT,
     BuyingFrequency TEXT )
     `;
-    console.log('Got here');
     return this.theData.run(sql);
   }
 
@@ -36,6 +35,7 @@ class dataRepository
   email, City, Username, ip_address, Language,
   CreditCardType, CreditCardNumber, BuyingFrequency)
   {
+    this.createTable();
     return this.theData.run(
       `INSERT INTO userData (id, first_name, last_name, Age,
       gender, Phone, email, City, Username, ip_address,
