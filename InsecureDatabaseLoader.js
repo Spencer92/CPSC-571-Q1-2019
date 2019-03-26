@@ -28,7 +28,7 @@ class dataRepository
     CreditCardNumber TEXT,
     BuyingFrequency TEXT )
     `;
-
+    console.log('Got here');
     return this.theData.run(sql);
   }
 
@@ -91,3 +91,4 @@ class dataRepository
   }
 
 }
+module.exports = dataRepository;
