@@ -13,7 +13,7 @@ class dataRepository
   createTable()
   {
     const sql = `CREATE TABLE IF NOT EXISTS userData (
-    id INTEGER PRIMARY KEY )`;//,
+    id INTEGER PRIMARY KEY)`;//,
 /*    first_name TEXT;
     last_name TEXT,
     Age INTEGER,
@@ -35,16 +35,18 @@ class dataRepository
   email, City, Username, ip_address, Language,
   CreditCardType, CreditCardNumber, BuyingFrequency*/)
   {
+    const idSql = `INSERT INTO userData (id) VALUES (?)`;
+    console.log('id is ', id, ' in InsecureDatabaseLoader create fn');
 //    this.createTable();
-    return this.theData.run(
-      `INSERT INTO userData (id) VALUES (?)`/*, first_name, last_name, Age,
+    return this.theData.run(idSql, [id]
+      /*`INSERT INTO userData (id) VALUES (?)`/*, first_name, last_name, Age,
       gender, Phone, email, City, Username, ip_address,
     Language, CreditCardType, CreditCardNumber, BuyingFrequency)
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,*/
-    [id]/*, first_name, last_name, Age,
+    /*[id]/*, first_name, last_name, Age,
     gender, Phone, email, City, Username, ip_address,
   Language, CreditCardType, CreditCardNumber, BuyingFrequency]*/
-    )
+);
   }
 
   update(userData)
@@ -76,18 +78,15 @@ class dataRepository
 
   delete(id)
   {
-    return this.theData.Run(
-      `DELETE FROM userData WHERE id = ?`,
-      [id]
-    );
+    const idSql = `DELETE FROM userData WHERE id = ?`;
+    return this.theData.Run(idSql,[id]);
   }
 
   getByID(id)
   {
-    return this.theData.get(
-      `SELECT * FROM userData WHERE id = ?`
-      [id]
-      );
+    const idSql = `SELECT * FROM userData WHERE id = ?`
+    console.log('Before this.theData.get in fn getByID');
+    return this.theData.get(idSql,[id]);
   }
 
 }

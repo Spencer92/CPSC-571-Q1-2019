@@ -16,14 +16,20 @@ function main()
   let projectID;
 
   insecureRepo.createTable();
-
+  console.log('got after insecureRepo.createTable in main fn');
+  var numTimes = 0;
 
   lineReader.on('line', function (line)
   {
     theData = line.split(",")
+
+    console.log('looped in lineReader ', numTimes, 'times');
+    numTimes++;
 //    console.log(theData[0]);
 //    console.log(theData[1]);
-    insecureRepo.create(parseInt(theData[0])); //id
+    console.log('the data in linereader is', theData[0], '\n');
+//    insecureRepo.create(parseInt(theData[0])); //id
+
 /*      theData[1].toString(), //first_name
       theData[2].toString(), //last_name
       parseInt(theData[3]), //Age
@@ -38,11 +44,40 @@ function main()
       theData[12].toString(), //CreditCardNumber
       theData[13].toString()); //BuyingFrequency*/
 //      setTimeout(function(){}, 500);
+    console.log('Before testDataSet \n');
+    var testData = insecureRepo.getByID(0);
+    console.log('After testdataSet \n');
+    console.log('testData', testData);
+    console.log('after displaying testData');
   });
+//  var testData = insecureRepo.getByID(1);
+//  console.log(testData);
+/*  for(var i = 0; i < 10; i++)
+  {
+    console.log('testData');
+    console.log(testData);
+    console.log(testData);
+    console.log(testData);
+    console.log(testData);
+  }*/
+/*
+  while(!lineReader.AtEndOfStream)
+  {
+    //wait
+  }
 
-  console.log('Before testDataSet \n');
-  var testData = insecureRepo.getByID(1);
-  console.log('After testdataSet \n');
-  console.log(testData);
+  while(0==0)
+  {
+    if(lineReader.AtEndOfStream)
+    {
+      console.log('Before testDataSet \n');
+      var testData = insecureRepo.getByID(1);
+      console.log('After testdataSet \n');
+      console.log('testData', testData);
+      console.log('after displaying testData');
+      break;
+    }
+  }
+*/
 }
 main();
