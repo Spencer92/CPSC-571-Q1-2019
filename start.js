@@ -13,10 +13,11 @@ function main()
   const insecure = new InsecureData('./InsecureDB.sqlite3');
   const insecureRepo = new dataRepository(insecure);
   var theData
-  let projectID;
+  let userID;
 
-  insecureRepo.createTable();
-  console.log('got after insecureRepo.createTable in main fn');
+//  insecureRepo.createTable()
+//  .then(() insecureRepo.create())
+//  console.log('got after insecureRepo.createTable in main fn');
   var numTimes = 0;
 
   lineReader.on('line', function (line)
@@ -28,6 +29,19 @@ function main()
 //    console.log(theData[0]);
 //    console.log(theData[1]);
     console.log('the data in linereader is', theData[0], '\n');
+    insecureRepo.createTable()
+      .then((userData) => {
+        projectId = userData.id;
+        const info = [
+          {
+            id: theData[0]
+          }
+        ]
+        return bluebird.all(info.map((info) => {
+          const { id } = info;
+          return insecureRepo.create(id);
+        }))
+      })
 //    insecureRepo.create(parseInt(theData[0])); //id
 
 /*      theData[1].toString(), //first_name

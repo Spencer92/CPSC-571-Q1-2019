@@ -44,8 +44,7 @@ class InsecureData
             {
               console.log('Deciding to resolve', newSql);
             }
-//            resolve(newSql);
-//            resolve({ id: this.lastID });
+            resolve({ id: this.lastID });
           }
           else
           {
