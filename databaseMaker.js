@@ -37,7 +37,7 @@ class InsecureData
         this.db.run(newSql, params, function (err)
         {
           newSql = sql;
-          console.log('sql is', newSql, theCounter);
+          console.log('sql in databaseMaker is', newSql, theCounter);
           if(!err)
           {
             for(var i = 0; i < 10; i++)
@@ -59,13 +59,17 @@ class InsecureData
 
   get(sql, params = [])
   {
-    console.log('get(sql, params) in databaseMaker sql is ', sql);
+    console.log('get(sql, params) in databaseMaker sql 1 is ', sql);
     return new bluebird((resolve, reject) =>
     {
+      console.log('get(sql, params) in databaseMaker sql 2 is ', sql);
       this.db.get(sql, params, (err, result) =>
       {
+        console.log('get(sql, params) in databaseMaker sql 3 is ', sql);
         if(!err)
         {
+          console.log('get(sql, params) in databaseMaker sql 4 is ', sql);
+          console.log('result is', result);
           resolve(result);
         }
         else

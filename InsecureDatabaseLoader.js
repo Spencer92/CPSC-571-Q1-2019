@@ -86,7 +86,7 @@ class dataRepository
   getByID(id)
   {
     console.log('id in getByID is', id);
-    const idSql = `SELECT * FROM userData WHERE id = 0`
+    const idSql = `SELECT * FROM userData WHERE id = ?`
     console.log('Before this.theData.get in fn getByID');
     return this.theData.get(idSql,[id]);
   }

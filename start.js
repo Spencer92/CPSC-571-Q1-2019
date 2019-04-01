@@ -34,7 +34,7 @@ function main()
         projectId = userData.id;
         const info = [
           {
-            id: 0//theData[0]
+            id: theData[0]
           }
         ]
         return bluebird.all(info.map((info) => {
@@ -59,10 +59,12 @@ function main()
       theData[13].toString()); //BuyingFrequency*/
 //      setTimeout(function(){}, 500);
     console.log('Before testDataSet \n');
-    var testData = insecureRepo.getByID(0);
+    var testData = insecureRepo.getByID(theData[0]);
     console.log('After testdataSet \n');
     console.log('testData', testData);
     console.log('after displaying testData');
+    testData = insecureRepo.getByID(theData[0])
+    console.log('testData', testData);
   });
 //  var testData = insecureRepo.getByID(1);
 //  console.log(testData);
