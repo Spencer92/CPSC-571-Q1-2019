@@ -34,7 +34,7 @@ function main()
         projectId = userData.id;
         const info = [
           {
-            id: theData[0]
+            id: 0//theData[0]
           }
         ]
         return bluebird.all(info.map((info) => {

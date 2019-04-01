@@ -1,4 +1,5 @@
 //help from https://stackabuse.com/a-sqlite-tutorial-with-node-js/
+//https://stackoverflow.com/questions/34202307/node-js-and-sqlite-sqlite-range-bind-or-column-index-out-of-range
 const sqlite3 = require('sqlite3').verbose();
 const bluebird = require('bluebird');
 
@@ -84,7 +85,8 @@ class dataRepository
 
   getByID(id)
   {
-    const idSql = `SELECT * FROM userData WHERE id = ?`
+    console.log('id in getByID is', id);
+    const idSql = `SELECT * FROM userData WHERE id = 0`
     console.log('Before this.theData.get in fn getByID');
     return this.theData.get(idSql,[id]);
   }
