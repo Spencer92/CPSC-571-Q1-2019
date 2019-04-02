@@ -1,6 +1,6 @@
-const bluebird = require('bluebird');
+const promise = require('bluebird');
 const InsecureData = require('./databaseMaker');
-const dataRepository = require('./InsecureDatabaseLoader');
+const DataRepository = require('./InsecureDatabaseLoader');
 
 //from https://stackoverflow.com/questions/6156501/read-a-file-one-line-at-a-time-in-node-js/32599033
 const lineReader = require('readline').createInterface({
@@ -8,10 +8,10 @@ const lineReader = require('readline').createInterface({
 });
 
 
-function main()
+async function main()
 {
   const insecure = new InsecureData('./InsecureDB.sqlite3');
-  const insecureRepo = new dataRepository(insecure);
+  const insecureRepo = new DataRepository(insecure);
   var theData
   let userID;
 
@@ -31,17 +31,36 @@ function main()
     console.log('the data in linereader is', theData[0], '\n');
     insecureRepo.createTable()
       .then((userData) => {
-        projectId = userData.id;
-        const info = [
+        userID = theData[0];
+        const users = [
           {
-            id: theData[0]
+            userID//id: theData[0]
           }
         ]
-        return bluebird.all(info.map((info) => {
-          const { id } = info;
+        return promise.all(users.map((user) => {
+          const { id } = user;
+          console.log('just about to exit .then userData');
           return insecureRepo.create(id);
         }))
       })
+      .then(() => insecureRepo.getByID(userID))
+      .then((theUser) =>
+      {
+        console.log(`\nRetreived user from database`);
+        console.log(`user id = ${theUser.id}`);
+      }
+
+    )
+/*      .then((testData) =>
+      {
+        console.log('Before testDataSet \n');
+        var testData = insecureRepo.getByID(theData[0]);
+        console.log('After testdataSet \n');
+        console.log('testData', testData);
+        console.log('after displaying testData');
+        testData = insecureRepo.getByID(theData[0])
+        console.log('testData', testData);
+    })*/
 //    insecureRepo.create(parseInt(theData[0])); //id
 
 /*      theData[1].toString(), //first_name
@@ -58,13 +77,7 @@ function main()
       theData[12].toString(), //CreditCardNumber
       theData[13].toString()); //BuyingFrequency*/
 //      setTimeout(function(){}, 500);
-    console.log('Before testDataSet \n');
-    var testData = insecureRepo.getByID(theData[0]);
-    console.log('After testdataSet \n');
-    console.log('testData', testData);
-    console.log('after displaying testData');
-    testData = insecureRepo.getByID(theData[0])
-    console.log('testData', testData);
+
   });
 //  var testData = insecureRepo.getByID(1);
 //  console.log(testData);
