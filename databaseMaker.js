@@ -2,7 +2,10 @@
 
 const sqlite3 = require('sqlite3').verbose();
 const promise = require('bluebird');
+
+
 var theCounter = 0;
+
 
 
 class InsecureData
