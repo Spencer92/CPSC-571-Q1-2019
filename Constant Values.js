@@ -1,16 +1,56 @@
-const ID = 0;
-const FIRST_NAME = 1;
-const LAST_NAME = 2;
-const AGE = 3;
-const GENDER = 4;
-const PHONE = 5;
-const EMAIL = 6;
-const CITY = 7;
-const USERNAME = 8;
-const IP_ADDRESS = 9;
-const LANGUAGE = 10;
-const CREDIT_CARD_TYPE = 11;
-const CREDIT_CARD_NUMBER = 12;
-const ORDERS_PER_MONTHS = 13;
-const CUSTOMER_LIFETIME_SPENDING = 14;
-const BUYING_PROBABILITY = 15;
+const attributes =
+(
+  function()
+  {
+    return
+    {
+      {
+        ID : 0;
+      },
+      {
+        FIRST_NAME : 1;
+      },
+      {
+        LAST_NAME : 2;
+      },
+      {
+        AGE : 3;
+      },
+      {
+        GENDER : 4;
+      },
+      {
+        PHONE : 5;
+      },
+      {
+        EMAIL : 6;
+      },
+      {
+        CITY : 7;
+      },
+      {
+        USERNAME : 8;
+      },
+      {
+        IP_ADDRESS : 9;
+      },
+      {
+        LANGUAGE : 10;
+      },
+      {
+        CREDIT_CARD_TYPE : 11;
+      },
+      {
+        CREDIT_CARD_NUMBER : 12;
+      },
+      {
+        ORDERS_PER_MONTHS : 13;
+      },
+      {
+        CUSTOMER_LIFETIME_SPENDING : 14;
+      }
+      {
+        BUYING_PROBABILITY : 15;
+      }
+  };
+}());
