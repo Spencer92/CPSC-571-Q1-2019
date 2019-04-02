@@ -33,7 +33,7 @@ async function main()
     console.log('the data in linereader is', theData[0], '\n');
     insecureRepo.createTable()
       .then((userData) => {
-        userID = theData[0];
+        userID = theData[attributes.ID];
         const users = [
           {
             userID//id: theData[0]
