@@ -32,20 +32,20 @@ class InsecureData
 //    theCounter++;
 
 
-      console.log('sql is ', sql, 'before return new promise');
+//      console.log('sql is ', sql, 'before return new promise');
       return new promise((resolve, reject) =>
       {
         var newSql = sql;
-        console.log('resolve is', resolve);
+//        console.log('resolve is', resolve);
         this.db.run(newSql, params, function (err)
         {
           newSql = sql;
-          console.log('sql in databaseMaker is', newSql, theCounter);
+//          console.log('sql in databaseMaker is', newSql, theCounter);
           if(!err)
           {
             for(var i = 0; i < 10; i++)
             {
-              console.log('Deciding to resolve', newSql);
+//              console.log('Deciding to resolve', newSql);
             }
             resolve({ id: this.lastID });
           }
@@ -62,18 +62,18 @@ class InsecureData
 
   get(sql, params = [])
   {
-    console.log('get(sql, params) in databaseMaker sql 1 is ', sql);
+//    console.log('get(sql, params) in databaseMaker sql 1 is ', sql);
     return new promise((resolve, reject) =>
     {
-      console.log('get(sql, params) in databaseMaker sql 2 is ', sql);
+//      console.log('get(sql, params) in databaseMaker sql 2 is ', sql);
       this.db.get(sql, params, (err, result) =>
       {
-        console.log('get(sql, params) in databaseMaker sql 3 is ', sql);
-        console.log('result is', result);
+//        console.log('get(sql, params) in databaseMaker sql 3 is ', sql);
+//        console.log('result is', result);
         if(!err)
         {
-          console.log('get(sql, params) in databaseMaker sql 4 is ', sql);
-          console.log('result is', result);
+//          console.log('get(sql, params) in databaseMaker sql 4 is ', sql);
+//          console.log('result is', result);
           resolve(result);
         }
         else
@@ -88,18 +88,18 @@ class InsecureData
 
   all(sql, params = [])
   {
-    console.log('get(sql, params) in databaseMaker sql 1 is ', sql);
+//    console.log('get(sql, params) in databaseMaker sql 1 is ', sql);
     return new promise((resolve, reject) =>
     {
-      console.log('get(sql, params) in databaseMaker sql 2 is ', sql);
+//      console.log('get(sql, params) in databaseMaker sql 2 is ', sql);
       this.db.all(sql, params, (err, rows) =>
       {
-        console.log('get(sql, params) in databaseMaker sql 2 is ', sql);
+//        console.log('get(sql, params) in databaseMaker sql 2 is ', sql);
         if(!err)
         {
-          console.log('get(sql, params) in databaseMaker sql 4 is ', sql);
+//          console.log('get(sql, params) in databaseMaker sql 4 is ', sql);
           console.log('rows is', rows);
-          resolve(rows);
+//          resolve(rows);
         }
         else
         {

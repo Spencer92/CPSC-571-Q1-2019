@@ -14,8 +14,7 @@ async function main()
 {
   const insecure = new InsecureData('./InsecureDB.sqlite3');
   const insecureRepo = new DataRepository(insecure);
-  var theData
-  let userID;
+
 
 //  insecureRepo.createTable()
 //  .then(() insecureRepo.create())
@@ -24,35 +23,98 @@ async function main()
 
   lineReader.on('line', function (line)
   {
-    theData = line.split(",")
+    var theData = line.split(",")
 
     console.log('looped in lineReader ', numTimes, 'times');
     numTimes++;
 //    console.log(theData[0]);
 //    console.log(theData[1]);
-    console.log('the data in linereader is', theData[0], '\n');
+//    console.log('the data in linereader is', theData[0], theData[1], '\n');
+    let userID;
+    var users;
     insecureRepo.createTable()
       .then((userData) => {
-        userID = theData[attributes.ID()];
-        const users = [
+        userID = theData[0];
+        users = [
           {
-            userID//id: theData[0]
+            userID,//id: theData[0]
+            first_name: theData[1],
+            last_name: theData[2],
+            Age: theData[3],
+            gender: theData[4],
+            Phone: theData[5],
+            email: theData[6],
+            City: theData[7],
+            Username: theData[8],
+            ip_address: theData[9],
+            Language: theData[10],
+            CreditCardType: theData[11],
+            CreditCardNumber: theData[12],
+            OrdersPerMonths: theData[13],
+            CustomerLifetimeSpending: theData[14],
+            PercentProbabilityOfBuyingOnVisit: theData[15]
           }
         ]
         return promise.all(users.map((user) => {
-          const { id } = user;
-          console.log('just about to exit .then userData');
-          return insecureRepo.create(id);
+          const { id,
+              first_name,
+              last_name,
+              Age,
+              gender,
+              Phone,
+              email,
+              City,
+              Username,
+              ip_address,
+              Language,
+              CreditCardType,
+              CreditCardNumber,
+              OrdersPerMonths,
+              CustomerLifetimeSpending,
+              PercentProbabilityOfBuyingOnVisit } = user;
+//          console.log('first_name after const{id,first_name} is ', first_name);
+//          console.log('just about to exit .then userData');
+          return insecureRepo.create(id,
+            first_name,
+            last_name,
+            Age,
+            gender,
+            Phone,
+            email,
+            City,
+            Username,
+            ip_address,
+            Language,
+            CreditCardType,
+            CreditCardNumber,
+            OrdersPerMonths,
+            CustomerLifetimeSpending,
+            PercentProbabilityOfBuyingOnVisit );
         }))
       })
       .then(() => insecureRepo.getByID(userID))
-      .then((theUser) =>
+/*      .then((theUser) =>
       {
         console.log(`\nRetreived user from database`);
         console.log(`user id = ${theUser.id}`);
+        console.log(`user first name = ${theUser.first_name}`);
+        console.log(`user last name = ${theUser.last_name}`);
+        console.log(`user Age = ${theUser.Age}`);
+        console.log(`user gender = ${theUser.gender}`);
+        console.log(`user Phone = ${theUser.Phone}`);
+        console.log(`user email = ${theUser.email}`);
+        console.log(`user City = ${theUser.City}`);
+        console.log(`user Username = ${theUser.Username}`);
+        console.log(`user ip_address = ${theUser.ip_address}`);
+        console.log(`user Language = ${theUser.Language}`);
+        console.log(`user CreditCardType = ${theUser.CreditCardType}`);
+        console.log(`user CreditCardNumber = ${theUser.CreditCardNumber}`);
+        console.log(`user OrdersPerMonths = ${theUser.OrdersPerMonths}`);
+        console.log(`user CustomerLifetimeSpending = ${theUser.CustomerLifetimeSpending}`);
+        console.log(`user PercentProbabilityOfBuyingOnVisit = ${theUser.PercentProbabilityOfBuyingOnVisit}`);
       }
 
-    )
+    )*/
 /*      .then((testData) =>
       {
         console.log('Before testDataSet \n');

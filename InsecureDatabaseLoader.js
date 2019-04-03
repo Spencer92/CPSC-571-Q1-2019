@@ -14,8 +14,8 @@ class dataRepository
   createTable()
   {
     const sql = `CREATE TABLE IF NOT EXISTS userData (
-    id INTEGER PRIMARY KEY)`;//,
-/*    first_name TEXT;
+    id INTEGER PRIMARY KEY,
+    first_name TEXT,
     last_name TEXT,
     Age INTEGER,
     gender TEXT,
@@ -27,19 +27,41 @@ class dataRepository
     Language TEXT,
     CreditCardType TEXT,
     CreditCardNumber TEXT,
-    BuyingFrequency TEXT )
-    `;*/
+    OrdersPerMonths INTEGER,
+    CustomerLifetimeSpending FLOAT,
+    PercentProbabilityOfBuyingOnVisit FLOAT)`;
     return this.theData.run(sql);
   }
 
-  create(id/*, first_name, last_name, Age, gender, Phone,
+  create(id, first_name, last_name, Age, gender, Phone,
   email, City, Username, ip_address, Language,
-  CreditCardType, CreditCardNumber, BuyingFrequency*/)
+  CreditCardType, CreditCardNumber, OrdersPerMonths,
+  CustomerLifetimeSpending, PercentProbabilityOfBuyingOnVisit)
   {
-    const idSql = `INSERT INTO userData (id) VALUES (?)`;
-    console.log('id is ', id, ' in InsecureDatabaseLoader create fn');
+    const idSql = `INSERT INTO userData
+    (id,
+    first_name,
+    last_name,
+    Age,
+    gender,
+    Phone,
+    email,
+    City,
+    Username,
+    ip_address,
+    Language,
+    CreditCardType,
+    CreditCardNumber,
+    OrdersPerMonths,
+    CustomerLifetimeSpending,
+    PercentProbabilityOfBuyingOnVisit) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`;
+//    console.log('id is ', id, ' in InsecureDatabaseLoader create fn');
 //    this.createTable();
-    return this.theData.run(idSql, [id]
+    return this.theData.run(idSql, [id, first_name,
+      last_name, Age, gender, Phone, email,
+      City, Username, ip_address, Language,
+      CreditCardType, CreditCardNumber, OrdersPerMonths,
+      CustomerLifetimeSpending, PercentProbabilityOfBuyingOnVisit]
       /*`INSERT INTO userData (id) VALUES (?)`/*, first_name, last_name, Age,
       gender, Phone, email, City, Username, ip_address,
     Language, CreditCardType, CreditCardNumber, BuyingFrequency)
@@ -69,7 +91,9 @@ class dataRepository
     Language = ?,
     CreditCardType = ?,
     CreditCardNumber = ?,
-    BuyingFrequency = ?
+    OrdersPerMonths = ?,
+    CustomerLifetimeSpending = ?,
+    PercentProbabilityOfBuyingOnVisit = ?
     WHERE id = ? `,
     [ id, first_name, last_name, Age,
     gender, Phone, email, City, Username, ip_address,
@@ -85,9 +109,9 @@ class dataRepository
 
   getByID(id)
   {
-    console.log('id in getByID is', id);
+//    console.log('id in getByID is', id);
     const idSql = `SELECT * FROM userData WHERE id = ?`
-    console.log('Before this.theData.get in fn getByID');
+//    console.log('Before this.theData.get in fn getByID');
     return this.theData.get(idSql,[id]);
   }
 
