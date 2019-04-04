@@ -13,9 +13,9 @@ const lineReader = require('readline').createInterface({
 async function main()
 {
   const secure = new InsecureData('./SecureDB.sqlite3');
-  const encryped = new InsecureData('./Encryped.sqlite3');
+  const encrypted = new InsecureData('./Encrypted.sqlite3');
   const secureRepo = new DataRepository(secure);
-  const encrypedRepo = new DataRepository(encryped);
+  const encryptedRepo = new DataRepository(encrypted);
 
 
 //  insecureRepo.createTable()
@@ -27,34 +27,44 @@ async function main()
   {
     var theData = line.split(",")
 
-    console.log('looped in lineReader ', numTimes, 'times');
+
     numTimes++;
 //    console.log(theData[0]);
 //    console.log(theData[1]);
 //    console.log('the data in linereader is', theData[0], theData[1], '\n');
     let userID;
     var users;
-    insecureRepo.createTable()
+    var theEncrypt = Array.apply(null, Array(15)).map(function () {});
+    secureRepo.createTable(`userData`)
+      .then(() => encryptedRepo.createTable(`encryptedData`))
+      .then(() =>
+      {
+          for(var i = 0; i < theEncrypt.length; i++)
+          {
+            theEncrypt[i] = Math.random();
+          }
+      })
       .then((userData) => {
+        console.log('looped in lineReader ', numTimes, 'times');
         userID = theData[0];
         users = [
           {
             userID,//id: theData[0]
-            first_name: theData[1],
-            last_name: theData[2],
-            Age: theData[3],
-            gender: theData[4],
-            Phone: theData[5],
-            email: theData[6],
-            City: theData[7],
-            Username: theData[8],
-            ip_address: theData[9],
-            Language: theData[10],
-            CreditCardType: theData[11],
-            CreditCardNumber: theData[12],
-            OrdersPerMonths: theData[13],
-            CustomerLifetimeSpending: theData[14],
-            PercentProbabilityOfBuyingOnVisit: theData[15]
+            first_name: theData[1] ^ theEncrypt[0],
+            last_name: theData[2] ^ theEncrypt[1],
+            Age: theData[3] ^ theEncrypt[2],
+            gender: theData[4] ^ theEncrypt[3],
+            Phone: theData[5] ^ theEncrypt[4],
+            email: theData[6] ^ theEncrypt[5],
+            City: theData[7] ^ theEncrypt[6],
+            Username: theData[8] ^ theEncrypt[7],
+            ip_address: theData[9] ^ theEncrypt[8],
+            Language: theData[10] ^ theEncrypt[9],
+            CreditCardType: theData[11] ^ theEncrypt[10],
+            CreditCardNumber: theData[12] ^ theEncrypt[11],
+            OrdersPerMonths: theData[13] ^ theEncrypt[12],
+            CustomerLifetimeSpending: theData[14] ^ theEncrypt[13],
+            PercentProbabilityOfBuyingOnVisit: theData[15] ^ theEncrypt[14]
           }
         ]
         return promise.all(users.map((user) => {
@@ -76,7 +86,8 @@ async function main()
               PercentProbabilityOfBuyingOnVisit } = user;
 //          console.log('first_name after const{id,first_name} is ', first_name);
 //          console.log('just about to exit .then userData');
-          return insecureRepo.create(id,
+          return secureRepo.create(`userData`,
+            id,
             first_name,
             last_name,
             Age,
@@ -94,7 +105,68 @@ async function main()
             PercentProbabilityOfBuyingOnVisit );
         }))
       })
-      .then(() => insecureRepo.getByID(userID))
+      .then(() => secureRepo.getByID(`userData`, userID))
+      .then((encryptedData) => {
+        userID = theData[0];
+        encrypts = [
+          {
+            userID,//id: theData[0]
+            first_name: theEncrypt[0].toString(),
+            last_name: theEncrypt[1].toString(),
+            Age: theEncrypt[2].toString(),
+            gender: theEncrypt[3].toString(),
+            Phone: theEncrypt[4].toString(),
+            email: theEncrypt[5].toString(),
+            City: theEncrypt[6].toString(),
+            Username: theEncrypt[7].toString(),
+            ip_address: theEncrypt[8].toString(),
+            Language: theEncrypt[9].toString(),
+            CreditCardType: theEncrypt[10].toString(),
+            CreditCardNumber: theEncrypt[11].toString(),
+            OrdersPerMonths: theEncrypt[12],
+            CustomerLifetimeSpending: theEncrypt[13],
+            PercentProbabilityOfBuyingOnVisit: theEncrypt[14]
+          }
+        ]
+        return promise.all(encrypts.map((encrypt) => {
+          const { id,
+              first_name,
+              last_name,
+              Age,
+              gender,
+              Phone,
+              email,
+              City,
+              Username,
+              ip_address,
+              Language,
+              CreditCardType,
+              CreditCardNumber,
+              OrdersPerMonths,
+              CustomerLifetimeSpending,
+              PercentProbabilityOfBuyingOnVisit } = encrypt;
+//          console.log('first_name after const{id,first_name} is ', first_name);
+//          console.log('just about to exit .then userData');
+          return encryptedRepo.create(`encryptedData`,
+            id,
+            first_name,
+            last_name,
+            Age,
+            gender,
+            Phone,
+            email,
+            City,
+            Username,
+            ip_address,
+            Language,
+            CreditCardType,
+            CreditCardNumber,
+            OrdersPerMonths,
+            CustomerLifetimeSpending,
+            PercentProbabilityOfBuyingOnVisit );
+        }))
+      })
+      .then(() => encryptedRepo.getByID(`encryptedData`, userID));
 /*      .then((theUser) =>
       {
         console.log(`\nRetreived user from database`);

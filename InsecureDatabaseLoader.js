@@ -11,9 +11,9 @@ class dataRepository
     this.theData = theData;
   }
 
-  createTable()
+  createTable(tableName)
   {
-    const sql = `CREATE TABLE IF NOT EXISTS userData (
+    const sql = `CREATE TABLE IF NOT EXISTS ` + tableName + ` (
     id INTEGER PRIMARY KEY,
     first_name TEXT,
     last_name TEXT,
@@ -33,12 +33,12 @@ class dataRepository
     return this.theData.run(sql);
   }
 
-  create(id, first_name, last_name, Age, gender, Phone,
+  create(table, id, first_name, last_name, Age, gender, Phone,
   email, City, Username, ip_address, Language,
   CreditCardType, CreditCardNumber, OrdersPerMonths,
   CustomerLifetimeSpending, PercentProbabilityOfBuyingOnVisit)
   {
-    const idSql = `INSERT INTO userData
+    const idSql = `INSERT INTO ` + table + `
     (id,
     first_name,
     last_name,
@@ -72,13 +72,13 @@ class dataRepository
 );
   }
 
-  update(userData)
+  update(table, userData)
   {
     const { id, first_name, last_name, Age,
     gender, Phone, email, City, Username, ip_address,
   Language, CreditCardType, CreditCardNumber, BuyingFrequency } = userData;
   return this.theData.run(
-    `UPDATE userData
+    `UPDATE ` + table + `
     first_name = ?,
     last_name = ?,
     Age = ?,
@@ -101,16 +101,16 @@ class dataRepository
   );
   }
 
-  delete(id)
+  delete(table, id)
   {
-    const idSql = `DELETE FROM userData WHERE id = ?`;
+    const idSql = `DELETE FROM ` + table + ` WHERE id = ?`;
     return this.theData.Run(idSql,[id]);
   }
 
-  getByID(id)
+  getByID(table, id)
   {
 //    console.log('id in getByID is', id);
-    const idSql = `SELECT * FROM userData WHERE id = ?`
+    const idSql = `SELECT * FROM ` + table + ` WHERE id = ?`
 //    console.log('Before this.theData.get in fn getByID');
     return this.theData.get(idSql,[id]);
   }
