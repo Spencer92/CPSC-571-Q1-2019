@@ -26,6 +26,16 @@ class InsecureData
     });
   }
 
+  decode(encryptedData, decrypter)
+  {
+    var decryptSave = decrypter;
+    var encryptSave = encryptedData;
+
+    decryptSave = encryptSave ^ decryptSave;
+    return decryptSave;
+
+  }
+
   run(sql, params = [])
   {
 //    console.log('Entered InsecureData fn run ', theCounter, ' times');
