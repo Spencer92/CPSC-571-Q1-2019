@@ -17,11 +17,11 @@ class InsecureData
     {
       if(!err)
       {
-        console.log('Connected to insecure database');
+        console.log('Connected to database');
       }
       else
       {
-        console.log('Could not connect to insecure database');
+        console.log('Could not connect to database');
       }
     });
   }
