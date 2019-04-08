@@ -12,7 +12,7 @@ class InsecureData
 {
   constructor(dbFilePath)
   {
-//    console.log('Entered insecureData Constructor')
+    console.log('Entered insecureData Constructor')
     this.db = new sqlite3.Database(dbFilePath, (err) =>
     {
       if(!err)

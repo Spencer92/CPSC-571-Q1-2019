@@ -1,6 +1,6 @@
 const promise = require('bluebird');
-const InsecureData = require('./databaseMaker');
-const DataRepository = require('./InsecureDatabaseLoader');
+const InsecureData = require('./Parser');
+const DataRepository = require('./attributeDecoder');
 const Constants = require('./Constant Values');
 
 
@@ -22,7 +22,7 @@ async function main()
 
 }
 
-
+/*
 function query(theStatement, lowerValue, higherValue, attribute, databaseOne, databaseTwo, databaseOneName, databaseTwoName)
 {
   const idSql = theStatement;
@@ -63,5 +63,5 @@ function decode(encryptedData, decrypter)
     return decryptSave;
 
   }
-
+*/
 main();
