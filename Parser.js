@@ -4,10 +4,11 @@ const sqlite3 = require('sqlite3').verbose();
 const promise = require('bluebird');
 
 
-class dataRepository
+class Parser
 {
   constructor(theData)
   {
+    console.log('theData is', theData);
     this.theData = theData;
   }
 
@@ -36,7 +37,7 @@ class dataRepository
   query(theStatement, lowerValue, higherValue, attribute, databaseOne, databaseTwo, databaseOneName, databaseTwoName)
   {
     const idSql = theStatement;
-    var sqlDecode = idSql.split("$");
+//    var sqlDecode = idSql.split("$");
 //    phraseOne = sqlDecode[0].toString() + sqlDecode[1].toString() + sqlDecode[3].toString();
 //    phraseTwo = sqlDecode[0].toString() + sqlDecode[2].toString() + sqlDecode[3].toString();
     var counter;
@@ -45,20 +46,34 @@ class dataRepository
     var valueOfAttForID;
     var decryptForID;
     var fitsParameters = 0; //how much values fall between the numbers given
-    for(theID = 0; theID < 100; theID++)``
+    for(var theID = 1; theID < 2; theID++)
     {
+      console.log('theId is', theID);
       SQLStatementOne = `SELECT ` + attribute + ` FROM ` + databaseOneName + ` WHERE id = ?`
       SQLStatementTwo = `SELECT ` + attribute + ` FROM ` + databaseTwoName + ` WHERE id = ?`
-      valueOfAttForID = databaseOne.get(SQLStatementOne, [theID]);
-      decryptForID = databaseTwo.get(SQLStatementTwo, [theID]);
-      if(valueOfAttForID != null && decryptForID != null)
+      console.log('SQLStatementOne is', SQLStatementOne);
+      console.log('SQLStatementTwo is', SQLStatementTwo);
+
+      valueOfAttForID = databaseOne.get(SQLStatementOne, [theID])
+      .then(() => decryptForID = databaseTwo.get(SQLStatementTwo, [theID]))
+      .then(() =>
       {
-        valueOfAttForID = decode(valueOfAttForID, decryptForID);
-        if(valueOfAttForID != null && valueOfAttForID <= higherValue && valueOfAttForID >= lowerValue)
+        console.log('New valueOfAttForID is ', valueOfAttForID);
+        console.log('New decryptForID is ', decryptForID);
+        if(valueOfAttForID != null && decryptForID != null)
         {
-          fitsParameters++;
+          valueOfAttForID = this.theData.decode(valueOfAttForID, decryptForID);
+          if(valueOfAttForID != null && valueOfAttForID <= higherValue && valueOfAttForID >= lowerValue)
+          {
+            fitsParameters++;
+          }
+          else
+          {
+
+            console.log("this is the value that got rejected", valueOfAttForID);
+          }
         }
-      }
+      });
     }
     return fitsParameters;
 //    return this.theData.run(theStatement);
@@ -108,4 +123,4 @@ class dataRepository
   }
 
 }
-module.exports = dataRepository;
+module.exports = Parser;

@@ -1,6 +1,6 @@
 const promise = require('bluebird');
-const InsecureData = require('./Parser');
-const DataRepository = require('./attributeDecoder');
+const AttributeDecoder = require('./attributeDecoder');
+const Parser = require('./Parser');
 const Constants = require('./Constant Values');
 
 
@@ -10,17 +10,19 @@ const lineReader = require('readline').createInterface({
 });
 
 
-async function main()
+function main()
 {
-  const secure = new InsecureData('./SecureDB.sqlite3');
-  const encrypted = new InsecureData('./Encrypted.sqlite3');
-  const secureRepo = new DataRepository(secure);
-  const encryptedRepo = new DataRepository(encrypted);
+  const secure = new AttributeDecoder('./SecureDB.sqlite3');
+  const encrypted = new AttributeDecoder('./Encrypted.sqlite3');
+  const secureRepo = new Parser(secure);
+  const encryptedRepo = new Parser(encrypted);
 
-  var theResult = query(null, 30, 50, `Age`, secure, encrypted, `userData`, `encryptedData`)
-  .then(() => console.log(theResult));
+  var theResult = secureRepo.query(null, 30, 50, `Age`, secure, encrypted, `userData`, `encryptedData`)
+  console.log(theResult);
 
 }
+
+
 
 /*
 function query(theStatement, lowerValue, higherValue, attribute, databaseOne, databaseTwo, databaseOneName, databaseTwoName)

@@ -50,21 +50,21 @@ async function main()
         users = [
           {
             userID,//id: theData[0]
-            first_name: theData[1] ^ theEncrypt[0],
-            last_name: theData[2] ^ theEncrypt[1],
-            Age: theData[3] ^ theEncrypt[2],
-            gender: theData[4] ^ theEncrypt[3],
-            Phone: theData[5] ^ theEncrypt[4],
-            email: theData[6] ^ theEncrypt[5],
-            City: theData[7] ^ theEncrypt[6],
-            Username: theData[8] ^ theEncrypt[7],
-            ip_address: theData[9] ^ theEncrypt[8],
-            Language: theData[10] ^ theEncrypt[9],
-            CreditCardType: theData[11] ^ theEncrypt[10],
-            CreditCardNumber: theData[12] ^ theEncrypt[11],
-            OrdersPerMonths: theData[13] ^ theEncrypt[12],
-            CustomerLifetimeSpending: theData[14] ^ theEncrypt[13],
-            PercentProbabilityOfBuyingOnVisit: theData[15] ^ theEncrypt[14]
+            first_name: theData[1] ^ Math.floor(theEncrypt[0]*10000),
+            last_name: theData[2] ^ Math.floor(theEncrypt[1]*10000),
+            Age: theData[3] ^ Math.floor(theEncrypt[2]*10000),
+            gender: theData[4] ^ Math.floor(theEncrypt[3]*10000),
+            Phone: theData[5] ^ Math.floor(theEncrypt[4]*10000),
+            email: theData[6] ^ Math.floor(theEncrypt[5]*10000),
+            City: theData[7] ^ Math.floor(theEncrypt[6]*10000),
+            Username: theData[8] ^ Math.floor(theEncrypt[7]*10000),
+            ip_address: theData[9] ^ Math.floor(theEncrypt[8]*10000),
+            Language: theData[10] ^ Math.floor(theEncrypt[9]*10000),
+            CreditCardType: theData[11] ^ Math.floor(theEncrypt[10]*10000),
+            CreditCardNumber: theData[12] ^ Math.floor(theEncrypt[11]*10000),
+            OrdersPerMonths: theData[13] ^ Math.floor(theEncrypt[12]*10000),
+            CustomerLifetimeSpending: theData[14] ^ Math.floor(theEncrypt[13]*10000),
+            PercentProbabilityOfBuyingOnVisit: theData[15] ^ Math.floor(theEncrypt[14]*10000)
           }
         ]
         return promise.all(users.map((user) => {
@@ -111,21 +111,21 @@ async function main()
         encrypts = [
           {
             userID,//id: theData[0]
-            first_name: theEncrypt[0].toString(),
-            last_name: theEncrypt[1].toString(),
-            Age: theEncrypt[2].toString(),
-            gender: theEncrypt[3].toString(),
-            Phone: theEncrypt[4].toString(),
-            email: theEncrypt[5].toString(),
-            City: theEncrypt[6].toString(),
-            Username: theEncrypt[7].toString(),
-            ip_address: theEncrypt[8].toString(),
-            Language: theEncrypt[9].toString(),
-            CreditCardType: theEncrypt[10].toString(),
-            CreditCardNumber: theEncrypt[11].toString(),
-            OrdersPerMonths: theEncrypt[12],
-            CustomerLifetimeSpending: theEncrypt[13],
-            PercentProbabilityOfBuyingOnVisit: theEncrypt[14]
+            first_name: Math.floor(theEncrypt[0]*10000).toString(),
+            last_name: Math.floor(theEncrypt[1]*10000).toString(),
+            Age: Math.floor(theEncrypt[2]*10000).toString(),
+            gender: Math.floor(theEncrypt[3]*10000).toString(),
+            Phone: Math.floor(theEncrypt[4]*10000).toString(),
+            email: Math.floor(theEncrypt[5]*10000).toString(),
+            City: Math.floor(theEncrypt[6]*10000).toString(),
+            Username: Math.floor(theEncrypt[7]*10000).toString(),
+            ip_address: Math.floor(theEncrypt[8]*10000).toString(),
+            Language: Math.floor(theEncrypt[9]*10000).toString(),
+            CreditCardType: Math.floor(theEncrypt[10]*10000).toString(),
+            CreditCardNumber: Math.floor(theEncrypt[11]*10000).toString(),
+            OrdersPerMonths: Math.floor(theEncrypt[12]*10000),
+            CustomerLifetimeSpending: Math.floor(theEncrypt[13]*10000),
+            PercentProbabilityOfBuyingOnVisit: Math.floor(theEncrypt[14]*10000)
           }
         ]
         return promise.all(encrypts.map((encrypt) => {
