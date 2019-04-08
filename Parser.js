@@ -4,7 +4,7 @@ const sqlite3 = require('sqlite3').verbose();
 const promise = require('bluebird');
 
 
-class dataRepository
+class Parser
 {
   constructor(theData)
   {
@@ -83,4 +83,4 @@ class dataRepository
   }
 
 }
-module.exports = dataRepository;
+module.exports = Parser;

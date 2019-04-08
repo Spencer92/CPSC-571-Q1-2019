@@ -8,11 +8,11 @@ var theCounter = 0;
 
 
 
-class InsecureData
+class AttributeDecoder
 {
   constructor(dbFilePath)
   {
-//    console.log('Entered insecureData Constructor')
+//    console.log('Entered AttributeDecoder Constructor')
     this.db = new sqlite3.Database(dbFilePath, (err) =>
     {
       if(!err)
@@ -38,7 +38,7 @@ class InsecureData
 
   run(sql, params = [])
   {
-//    console.log('Entered InsecureData fn run ', theCounter, ' times');
+//    console.log('Entered AttributeDecoder fn run ', theCounter, ' times');
 //    theCounter++;
 
 
@@ -122,4 +122,4 @@ class InsecureData
   }
 
 }
-module.exports = InsecureData;
+module.exports = AttributeDecoder;

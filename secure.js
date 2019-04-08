@@ -1,5 +1,5 @@
 const promise = require('bluebird');
-const InsecureData = require('./databaseMaker');
+const InsecureData = require('./attributeDecoder');
 const DataRepository = require('./InsecureDatabaseLoader');
 const Constants = require('./Constant Values');
 
@@ -12,10 +12,10 @@ const lineReader = require('readline').createInterface({
 
 async function main()
 {
-  const secure = new InsecureData('./SecureDB.sqlite3');
-  const encrypted = new InsecureData('./Encrypted.sqlite3');
-  const secureRepo = new DataRepository(secure);
-  const encryptedRepo = new DataRepository(encrypted);
+  const secure = new Parser('./SecureDB.sqlite3');
+  const encrypted = new Parser('./Encrypted.sqlite3');
+  const secureRepo = new AttributeDecoder(secure);
+  const encryptedRepo = new AttributeDecoder(encrypted);
 
 
 
