@@ -1,6 +1,6 @@
 const promise = require('bluebird');
 const InsecureData = require('./attributeDecoder');
-const DataRepository = require('./InsecureDatabaseLoader');
+const DataRepository = require('./Parser');
 const Constants = require('./Constant Values');
 
 
