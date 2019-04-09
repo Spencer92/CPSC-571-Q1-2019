@@ -14,10 +14,11 @@ function main()
 {
   const secure = new AttributeDecoder('./SecureDB.sqlite3');
   const encrypted = new AttributeDecoder('./Encrypted.sqlite3');
-  const secureRepo = new Parser(secure);
-  const encryptedRepo = new Parser(encrypted);
+  const secureRepo = new Parser(secure, encrypted);
+//  const encryptedRepo = new Parser(encrypted);
+  var theResult = 0;
+  theResult = secureRepo.query(null, 30, 60, `Age`, secure, encrypted, `userData`, `encryptedData`);
 
-  var theResult = secureRepo.query(null, 30, 50, `Age`, secure, encrypted, `userData`, `encryptedData`)
   console.log(theResult);
 
 }

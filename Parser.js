@@ -6,10 +6,11 @@ const promise = require('bluebird');
 
 class Parser
 {
-  constructor(theData)
+  constructor(secureData, encryptedData)
   {
-    console.log('theData is', theData);
-    this.theData = theData;
+    console.log('secureData is', secureData);
+    this.secureData = secureData;
+    this.encryptedData = encryptedData;
   }
 
   createTable(tableName)
@@ -31,7 +32,7 @@ class Parser
     OrdersPerMonths INTEGER,
     CustomerLifetimeSpending FLOAT,
     PercentProbabilityOfBuyingOnVisit FLOAT)`;
-    return this.theData.run(sql);
+    return this.secureData.run(sql);
   }
 
   query(theStatement, lowerValue, higherValue, attribute, databaseOne, databaseTwo, databaseOneName, databaseTwoName)
@@ -46,37 +47,49 @@ class Parser
     var valueOfAttForID;
     var decryptForID;
     var fitsParameters = 0; //how much values fall between the numbers given
-    for(var theID = 1; theID < 2; theID++)
+    var decrypterNum;
+    var toBeDecryptedNum;
+    var theID = 0;
+    var end = 2;
+    while(theID < end)
     {
-      console.log('theId is', theID);
-      SQLStatementOne = `SELECT ` + attribute + ` FROM ` + databaseOneName + ` WHERE id = ?`
+
+/*      SQLStatementOne = `SELECT ` + attribute + ` FROM ` + databaseOneName + ` WHERE id = ?`
       SQLStatementTwo = `SELECT ` + attribute + ` FROM ` + databaseTwoName + ` WHERE id = ?`
       console.log('SQLStatementOne is', SQLStatementOne);
-      console.log('SQLStatementTwo is', SQLStatementTwo);
+      console.log('SQLStatementTwo is', SQLStatementTwo);*/
 
-      valueOfAttForID = databaseOne.get(SQLStatementOne, [theID])
-      .then(() => decryptForID = databaseTwo.get(SQLStatementTwo, [theID]))
+      valueOfAttForID = this.getByAge(`userData`, 0, this.secureData)
+      .then(() => valueOfAttForID = this.getByAge(`userData`, theID, this.secureData))
+      .then(() => decryptForID = this.getByAge(`encryptedData`, theID, this.encryptedData))
+//      .then(() => decryptForID = databaseTwo.get(SQLStatementTwo, [theID]))
+      .then(() => console.log('theId is', theID))
       .then(() =>
       {
-        console.log('New valueOfAttForID is ', valueOfAttForID);
+        console.log('New valueOfAttForID is ', valueOfAttForID._rejectionHandler0.Age);
+        toBeDecryptedNum = valueOfAttForID._rejectionHandler0.Age;
+        decrypterNum = decryptForID._rejectionHandler0.Age;
         console.log('New decryptForID is ', decryptForID);
         if(valueOfAttForID != null && decryptForID != null)
         {
-          valueOfAttForID = this.theData.decode(valueOfAttForID, decryptForID);
-          if(valueOfAttForID != null && valueOfAttForID <= higherValue && valueOfAttForID >= lowerValue)
+          toBeDecryptedNum = this.secureData.decode(toBeDecryptedNum, decrypterNum);
+          if(toBeDecryptedNum != null && toBeDecryptedNum <= higherValue && toBeDecryptedNum >= lowerValue)
           {
             fitsParameters++;
           }
           else
           {
 
-            console.log("this is the value that got rejected", valueOfAttForID);
+            console.log("this is the value that got rejected:", toBeDecryptedNum);
           }
         }
-      });
+        theID++;
+      })
+      .then(() => console.log(fitsParameters))
     }
+
     return fitsParameters;
-//    return this.theData.run(theStatement);
+//    return this.secureData.run(theStatement);
   }
 
   update(table, userData)
@@ -84,7 +97,7 @@ class Parser
     const { id, first_name, last_name, Age,
     gender, Phone, email, City, Username, ip_address,
   Language, CreditCardType, CreditCardNumber, BuyingFrequency } = userData;
-  return this.theData.run(
+  return this.secureData.run(
     `UPDATE ` + table + `
     first_name = ?,
     last_name = ?,
@@ -111,15 +124,21 @@ class Parser
   delete(table, id)
   {
     const idSql = `DELETE FROM ` + table + ` WHERE id = ?`;
-    return this.theData.Run(idSql,[id]);
+    return this.secureData.Run(idSql,[id]);
+  }
+
+  getByAge(table, id, database)
+  {
+    const ageSql = `SELECT Age FROM ` + table + ` WHERE id = ?`
+    return database.get(ageSql, [id]);
   }
 
   getByID(table, id)
   {
 //    console.log('id in getByID is', id);
     const idSql = `SELECT * FROM ` + table + ` WHERE id = ?`
-//    console.log('Before this.theData.get in fn getByID');
-    return this.theData.get(idSql,[id]);
+//    console.log('Before this.secureData.get in fn getByID');
+    return this.secureData.get(idSql,[id]);
   }
 
 }

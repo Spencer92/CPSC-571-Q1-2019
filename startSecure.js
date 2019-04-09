@@ -16,7 +16,7 @@ async function main()
   const encrypted = new InsecureData('./Encrypted.sqlite3');
   const secureRepo = new DataRepository(secure);
   const encryptedRepo = new DataRepository(encrypted);
-
+  const upperLimit = 1;
 
 //  insecureRepo.createTable()
 //  .then(() insecureRepo.create())
@@ -41,7 +41,7 @@ async function main()
       {
           for(var i = 0; i < theEncrypt.length; i++)
           {
-            theEncrypt[i] = Math.random();
+            theEncrypt[i] = 2;//Math.random();
           }
       })
       .then((userData) => {
@@ -50,21 +50,21 @@ async function main()
         users = [
           {
             userID,//id: theData[0]
-            first_name: theData[1] ^ Math.floor(theEncrypt[0]*10000),
-            last_name: theData[2] ^ Math.floor(theEncrypt[1]*10000),
-            Age: theData[3] ^ Math.floor(theEncrypt[2]*10000),
-            gender: theData[4] ^ Math.floor(theEncrypt[3]*10000),
-            Phone: theData[5] ^ Math.floor(theEncrypt[4]*10000),
-            email: theData[6] ^ Math.floor(theEncrypt[5]*10000),
-            City: theData[7] ^ Math.floor(theEncrypt[6]*10000),
-            Username: theData[8] ^ Math.floor(theEncrypt[7]*10000),
-            ip_address: theData[9] ^ Math.floor(theEncrypt[8]*10000),
-            Language: theData[10] ^ Math.floor(theEncrypt[9]*10000),
-            CreditCardType: theData[11] ^ Math.floor(theEncrypt[10]*10000),
-            CreditCardNumber: theData[12] ^ Math.floor(theEncrypt[11]*10000),
-            OrdersPerMonths: theData[13] ^ Math.floor(theEncrypt[12]*10000),
-            CustomerLifetimeSpending: theData[14] ^ Math.floor(theEncrypt[13]*10000),
-            PercentProbabilityOfBuyingOnVisit: theData[15] ^ Math.floor(theEncrypt[14]*10000)
+            first_name: theData[1] ^ Math.floor(theEncrypt[0]*upperLimit),
+            last_name: theData[2] ^ Math.floor(theEncrypt[1]*upperLimit),
+            Age: theData[3] ^ Math.floor(theEncrypt[2]*upperLimit),
+            gender: theData[4] ^ Math.floor(theEncrypt[3]*upperLimit),
+            Phone: theData[5] ^ Math.floor(theEncrypt[4]*upperLimit),
+            email: theData[6] ^ Math.floor(theEncrypt[5]*upperLimit),
+            City: theData[7] ^ Math.floor(theEncrypt[6]*upperLimit),
+            Username: theData[8] ^ Math.floor(theEncrypt[7]*upperLimit),
+            ip_address: theData[9] ^ Math.floor(theEncrypt[8]*upperLimit),
+            Language: theData[10] ^ Math.floor(theEncrypt[9]*upperLimit),
+            CreditCardType: theData[11] ^ Math.floor(theEncrypt[10]*upperLimit),
+            CreditCardNumber: theData[12] ^ Math.floor(theEncrypt[11]*upperLimit),
+            OrdersPerMonths: theData[13] ^ Math.floor(theEncrypt[12]*upperLimit),
+            CustomerLifetimeSpending: theData[14] ^ Math.floor(theEncrypt[13]*upperLimit),
+            PercentProbabilityOfBuyingOnVisit: theData[15] ^ Math.floor(theEncrypt[14]*upperLimit)
           }
         ]
         return promise.all(users.map((user) => {
@@ -111,21 +111,21 @@ async function main()
         encrypts = [
           {
             userID,//id: theData[0]
-            first_name: Math.floor(theEncrypt[0]*10000).toString(),
-            last_name: Math.floor(theEncrypt[1]*10000).toString(),
-            Age: Math.floor(theEncrypt[2]*10000).toString(),
-            gender: Math.floor(theEncrypt[3]*10000).toString(),
-            Phone: Math.floor(theEncrypt[4]*10000).toString(),
-            email: Math.floor(theEncrypt[5]*10000).toString(),
-            City: Math.floor(theEncrypt[6]*10000).toString(),
-            Username: Math.floor(theEncrypt[7]*10000).toString(),
-            ip_address: Math.floor(theEncrypt[8]*10000).toString(),
-            Language: Math.floor(theEncrypt[9]*10000).toString(),
-            CreditCardType: Math.floor(theEncrypt[10]*10000).toString(),
-            CreditCardNumber: Math.floor(theEncrypt[11]*10000).toString(),
-            OrdersPerMonths: Math.floor(theEncrypt[12]*10000),
-            CustomerLifetimeSpending: Math.floor(theEncrypt[13]*10000),
-            PercentProbabilityOfBuyingOnVisit: Math.floor(theEncrypt[14]*10000)
+            first_name: Math.floor(theEncrypt[0]*upperLimit).toString(),
+            last_name: Math.floor(theEncrypt[1]*upperLimit).toString(),
+            Age: Math.floor(theEncrypt[2]*upperLimit).toString(),
+            gender: Math.floor(theEncrypt[3]*upperLimit).toString(),
+            Phone: Math.floor(theEncrypt[4]*upperLimit).toString(),
+            email: Math.floor(theEncrypt[5]*upperLimit).toString(),
+            City: Math.floor(theEncrypt[6]*upperLimit).toString(),
+            Username: Math.floor(theEncrypt[7]*upperLimit).toString(),
+            ip_address: Math.floor(theEncrypt[8]*upperLimit).toString(),
+            Language: Math.floor(theEncrypt[9]*upperLimit).toString(),
+            CreditCardType: Math.floor(theEncrypt[10]*upperLimit).toString(),
+            CreditCardNumber: Math.floor(theEncrypt[11]*upperLimit).toString(),
+            OrdersPerMonths: Math.floor(theEncrypt[12]*upperLimit),
+            CustomerLifetimeSpending: Math.floor(theEncrypt[13]*upperLimit),
+            PercentProbabilityOfBuyingOnVisit: Math.floor(theEncrypt[14]*upperLimit)
           }
         ]
         return promise.all(encrypts.map((encrypt) => {
