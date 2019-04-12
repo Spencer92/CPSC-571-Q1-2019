@@ -83,9 +83,10 @@ class Parser
             console.log("this is the value that got rejected:", toBeDecryptedNum);
           }
         }
-        theID++;
+
       })
       .then(() => console.log(fitsParameters))
+      theID++;
     }
 
     return fitsParameters;
