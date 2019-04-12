@@ -34,6 +34,7 @@ async function main()
 //    console.log('the data in linereader is', theData[0], theData[1], '\n');
     let userID;
     var users;
+    //this creates the database
     var theEncrypt = Array.apply(null, Array(15)).map(function () {});
     secureRepo.createTable(`userData`)
       .then(() => encryptedRepo.createTable(`encryptedData`))
@@ -41,11 +42,11 @@ async function main()
       {
           for(var i = 0; i < theEncrypt.length; i++)
           {
-            theEncrypt[i] = 2;//Math.random();
+            theEncrypt[i] = 2;//Math.random();//want to be random number, but just 2 for now
           }
       })
       .then((userData) => {
-        console.log('looped in lineReader ', numTimes, 'times');
+//        console.log('looped in lineReader ', numTimes, 'times');
         userID = theData[0];
         users = [
           {

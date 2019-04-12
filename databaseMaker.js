@@ -1,5 +1,5 @@
 //made with help from https://stackabuse.com/a-sqlite-tutorial-with-node-js/
-
+//Needed for creating the database
 const sqlite3 = require('sqlite3').verbose();
 const promise = require('bluebird');
 

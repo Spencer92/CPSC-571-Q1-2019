@@ -1,5 +1,5 @@
 //made with help from https://stackabuse.com/a-sqlite-tutorial-with-node-js/
-
+//Needed for decrypting
 const sqlite3 = require('sqlite3').verbose();
 const promise = require('bluebird');
 
@@ -10,7 +10,7 @@ var theCounter = 0;
 
 class AttributeDecoder
 {
-  constructor(dbFilePath)
+  constructor(dbFilePath) //Mk
   {
     console.log('Entered AttributeDecoder Constructor')
     console.log('dbFilePath is', dbFilePath);
@@ -36,7 +36,7 @@ class AttributeDecoder
     console.log('decryptSave is', decryptSave);
     console.log('encryptSave is', encryptSave);
 
-    var theResult = 2 ^ 25;
+//    var theResult = 2 ^ 25; //just testing to see if I was getting the right answer
     console.log('The result is', theResult);
 
     decryptSave = encryptSave ^ decryptSave;

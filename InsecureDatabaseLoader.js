@@ -1,5 +1,7 @@
 //help from https://stackabuse.com/a-sqlite-tutorial-with-node-js/
 //https://stackoverflow.com/questions/34202307/node-js-and-sqlite-sqlite-range-bind-or-column-index-out-of-range
+//needed for creating the database
+
 const sqlite3 = require('sqlite3').verbose();
 const promise = require('bluebird');
 

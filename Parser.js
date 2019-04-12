@@ -35,12 +35,12 @@ class Parser
     return this.secureData.run(sql);
   }
 
+  /*Currently, what is supposed to parse the data
+    currently works with age only*/
+
   query(theStatement, lowerValue, higherValue, attribute, databaseOne, databaseTwo, databaseOneName, databaseTwoName)
   {
     const idSql = theStatement;
-//    var sqlDecode = idSql.split("$");
-//    phraseOne = sqlDecode[0].toString() + sqlDecode[1].toString() + sqlDecode[3].toString();
-//    phraseTwo = sqlDecode[0].toString() + sqlDecode[2].toString() + sqlDecode[3].toString();
     var counter;
     var SQLStatementOne; //for the raw that needs to be decrypted
     var SQLStatementTwo; //for the data that will decrypt
@@ -51,15 +51,15 @@ class Parser
     var toBeDecryptedNum;
     var theID = 0;
     var end = 2;
-    while(theID < end)
+
+    /*
+    The loop
+    */
+
+    while(theID < end) // the issue is that it's running through all this before parsing any values. When actually parsing it's correct in its decoding
     {
 
-/*      SQLStatementOne = `SELECT ` + attribute + ` FROM ` + databaseOneName + ` WHERE id = ?`
-      SQLStatementTwo = `SELECT ` + attribute + ` FROM ` + databaseTwoName + ` WHERE id = ?`
-      console.log('SQLStatementOne is', SQLStatementOne);
-      console.log('SQLStatementTwo is', SQLStatementTwo);*/
-
-      valueOfAttForID = this.getByAge(`userData`, 0, this.secureData)
+      valueOfAttForID = this.getByAge(`userData`, 0, this.secureData) //hacky way to get the data
       .then(() => valueOfAttForID = this.getByAge(`userData`, theID, this.secureData))
       .then(() => decryptForID = this.getByAge(`encryptedData`, theID, this.encryptedData))
 //      .then(() => decryptForID = databaseTwo.get(SQLStatementTwo, [theID]))
@@ -89,10 +89,9 @@ class Parser
     }
 
     return fitsParameters;
-//    return this.secureData.run(theStatement);
   }
 
-  update(table, userData)
+  update(table, userData) //currently not in use
   {
     const { id, first_name, last_name, Age,
     gender, Phone, email, City, Username, ip_address,
@@ -121,7 +120,7 @@ class Parser
   );
   }
 
-  delete(table, id)
+  delete(table, id) //currently not in use
   {
     const idSql = `DELETE FROM ` + table + ` WHERE id = ?`;
     return this.secureData.Run(idSql,[id]);
