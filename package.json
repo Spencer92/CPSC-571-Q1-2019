@@ -4,6 +4,7 @@
   "description": "",
   "main": "algorithm.js",
   "dependencies": {
+    "async": "^2.6.2",
     "bcrypt": "^3.0.4",
     "bluebird": "^3.5.3",
     "body-parser": "^1.18.3",
