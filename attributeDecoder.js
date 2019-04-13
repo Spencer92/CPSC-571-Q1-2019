@@ -37,7 +37,7 @@ class AttributeDecoder
     console.log('encryptSave is', encryptSave);
 
 //    var theResult = 2 ^ 25; //just testing to see if I was getting the right answer
-    console.log('The result is', theResult);
+//    console.log('The result is', theResult);
 
     decryptSave = encryptSave ^ decryptSave;
     encryptSave = decryptSave ^ encryptSave;
