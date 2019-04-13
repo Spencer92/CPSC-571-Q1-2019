@@ -8,11 +8,14 @@ var theCounter = 0;
 
 
 
-class InsecureData
+class AttributeDecoder
 {
   constructor(dbFilePath)
   {
-    console.log('Entered insecureData Constructor')
+    console.log('Entered AttributeDecoder Constructor')
+    console.log('dbFilePath is', dbFilePath);
+    var theString = dbFilePath.toString();
+    console.log('theString is', theString);
     this.db = new sqlite3.Database(dbFilePath, (err) =>
     {
       if(!err)
@@ -30,15 +33,26 @@ class InsecureData
   {
     var decryptSave = decrypter;
     var encryptSave = encryptedData;
+    console.log('decryptSave is', decryptSave);
+    console.log('encryptSave is', encryptSave);
+
+    var theResult = 2 ^ 25;
+    console.log('The result is', theResult);
 
     decryptSave = encryptSave ^ decryptSave;
+    encryptSave = decryptSave ^ encryptSave;
+    console.log('decryptSave after is', decryptSave);
+    console.log('encryptSave after is', encryptSave);
     return decryptSave;
 
   }
 
+
+
+
   run(sql, params = [])
   {
-//    console.log('Entered InsecureData fn run ', theCounter, ' times');
+//    console.log('Entered AttributeDecoder fn run ', theCounter, ' times');
 //    theCounter++;
 
 
@@ -83,7 +97,7 @@ class InsecureData
         if(!err)
         {
 //          console.log('get(sql, params) in databaseMaker sql 4 is ', sql);
-//          console.log('result is', result);
+          console.log('result is', result);
           resolve(result);
         }
         else
@@ -122,4 +136,4 @@ class InsecureData
   }
 
 }
-module.exports = InsecureData;
+module.exports = AttributeDecoder;
