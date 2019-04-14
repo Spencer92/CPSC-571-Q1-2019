@@ -58,18 +58,25 @@ class Parser
     var theID = 0;
     var end = 2;
 
+    var arrayVal = Array.from(this.getByAttribute(this.secureData,`userData`,`Age`));
 
-
-    while(theID < end)
+    console.log(`About to enter arrayVal`);
+    var i = 0;
+    for(i in arrayVal)
     {
+      console.log(`This is arrayVal:`, arrayVal);
+    }
+/*
+    while(theID < end)
+    {*/
 
 /*      SQLStatementOne = `SELECT ` + attribute + ` FROM ` + databaseOneName + ` WHERE id = ?`
       SQLStatementTwo = `SELECT ` + attribute + ` FROM ` + databaseTwoName + ` WHERE id = ?`
       console.log('SQLStatementOne is', SQLStatementOne);
       console.log('SQLStatementTwo is', SQLStatementTwo);*/
 
-      Array.from(this.getByAttribute(this.secureData,`userData`,`Age`));
 
+/*
       valueOfAttForID = this.getByAge(`userData`, 0, this.secureData)
       .then(() => valueOfAttForID = this.getByAge(`userData`, theID, this.secureData))
       .then(() => decryptForID = this.getByAge(`encryptedData`, theID, this.encryptedData))
@@ -100,7 +107,7 @@ class Parser
       theID++;
     }
 
-    return fitsParameters;
+    return fitsParameters;*/
   }
 
   update(table, userData) //currently not in use
@@ -136,6 +143,12 @@ class Parser
   {
     const idSql = `DELETE FROM ` + table + ` WHERE id = ?`;
     return this.secureData.Run(idSql,[id]);
+  }
+
+  getByAttribute(database,table,attribute)
+  {
+    const attSQL = `SELECT ` + attribute + ` FROM ` + table;
+    return database.getSingleColumn(attSQL);
   }
 
   getByAge(table, id, database)

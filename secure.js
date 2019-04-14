@@ -63,5 +63,5 @@ function decode(encryptedData, decrypter)
 
     decryptSave = encryptSave ^ decryptSave;
     return decryptSave;
-
+*/
 main();

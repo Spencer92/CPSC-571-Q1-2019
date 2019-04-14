@@ -37,7 +37,7 @@ class AttributeDecoder
     console.log('encryptSave is', encryptSave);
 
 //    var theResult = 2 ^ 25; //just testing to see if I was getting the right answer
-    console.log('The result is', theResult);
+//    console.log('The result is', theResult);
 
     decryptSave = encryptSave ^ decryptSave;
     encryptSave = decryptSave ^ encryptSave;
@@ -91,6 +91,32 @@ class AttributeDecoder
     {
 //      console.log('get(sql, params) in databaseMaker sql 2 is ', sql);
       this.db.get(sql, params, (err, result) =>
+      {
+//        console.log('get(sql, params) in databaseMaker sql 3 is ', sql);
+//        console.log('result is', result);
+        if(!err)
+        {
+//          console.log('get(sql, params) in databaseMaker sql 4 is ', sql);
+          console.log('result is', result);
+          resolve(result);
+        }
+        else
+        {
+          console.log('Error running sql: ' + sql);
+          console.log(err);
+          reject(err);
+        }
+      })
+    })
+  }
+
+  getSingleColumn(sql)
+  {
+//    console.log('get(sql, params) in databaseMaker sql 1 is ', sql);
+    return new promise((resolve, reject) =>
+    {
+//      console.log('get(sql, params) in databaseMaker sql 2 is ', sql);
+      this.db.get(sql, (err, result) =>
       {
 //        console.log('get(sql, params) in databaseMaker sql 3 is ', sql);
 //        console.log('result is', result);
