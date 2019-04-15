@@ -58,14 +58,15 @@ class Parser
     var theID = 0;
     var end = 2;
 
-    var arrayVal = Array.from(this.getByAttribute(this.secureData,`userData`,`Age`));
 
+    console.log(`just before entering array`);
+    var arrayVal = /*Array.from(*/(this.getByAttribute(this.secureData,`userData`,`Age`));
     console.log(`About to enter arrayVal`);
     var i = 0;
-    for(i in arrayVal)
-    {
+//    for(i in arrayVal)
+//    {
       console.log(`This is arrayVal:`, arrayVal);
-    }
+//    }
 /*
     while(theID < end)
     {*/
@@ -148,7 +149,7 @@ class Parser
   getByAttribute(database,table,attribute)
   {
     const attSQL = `SELECT ` + attribute + ` FROM ` + table;
-    return database.getSingleColumn(attSQL);
+    return database.all(attSQL);
   }
 
   getByAge(table, id, database)

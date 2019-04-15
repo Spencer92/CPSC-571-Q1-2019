@@ -112,17 +112,17 @@ class AttributeDecoder
 
   getSingleColumn(sql)
   {
-//    console.log('get(sql, params) in databaseMaker sql 1 is ', sql);
+    console.log('get(sql, params) in databaseMaker sql 1 is ', sql);
     return new promise((resolve, reject) =>
     {
-//      console.log('get(sql, params) in databaseMaker sql 2 is ', sql);
+      console.log('get(sql, params) in databaseMaker sql 2 is ', sql);
       this.db.get(sql, (err, result) =>
       {
-//        console.log('get(sql, params) in databaseMaker sql 3 is ', sql);
-//        console.log('result is', result);
+        console.log('get(sql, params) in databaseMaker sql 3 is ', sql);
+        console.log('result is', result);
         if(!err)
         {
-//          console.log('get(sql, params) in databaseMaker sql 4 is ', sql);
+          console.log('get(sql, params) in databaseMaker sql 4 is ', sql);
           console.log('result is', result);
           resolve(result);
         }
@@ -138,7 +138,7 @@ class AttributeDecoder
 
   all(sql, params = [])
   {
-//    console.log('get(sql, params) in databaseMaker sql 1 is ', sql);
+    console.log('get(sql, params) in databaseMaker sql 1 is ', sql);
     return new promise((resolve, reject) =>
     {
 //      console.log('get(sql, params) in databaseMaker sql 2 is ', sql);

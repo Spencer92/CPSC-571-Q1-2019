@@ -57,57 +57,14 @@ class dataRepository
     OrdersPerMonths,
     CustomerLifetimeSpending,
     PercentProbabilityOfBuyingOnVisit) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`;
-//    console.log('id is ', id, ' in InsecureDatabaseLoader create fn');
-//    this.createTable();
     return this.theData.run(idSql, [id, first_name,
       last_name, Age, gender, Phone, email,
       City, Username, ip_address, Language,
       CreditCardType, CreditCardNumber, OrdersPerMonths,
       CustomerLifetimeSpending, PercentProbabilityOfBuyingOnVisit]
-      /*`INSERT INTO userData (id) VALUES (?)`/*, first_name, last_name, Age,
-      gender, Phone, email, City, Username, ip_address,
-    Language, CreditCardType, CreditCardNumber, BuyingFrequency)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,*/
-    /*[id]/*, first_name, last_name, Age,
-    gender, Phone, email, City, Username, ip_address,
-  Language, CreditCardType, CreditCardNumber, BuyingFrequency]*/
 );
   }
 
-  update(table, userData)
-  {
-    const { id, first_name, last_name, Age,
-    gender, Phone, email, City, Username, ip_address,
-  Language, CreditCardType, CreditCardNumber, BuyingFrequency } = userData;
-  return this.theData.run(
-    `UPDATE ` + table + `
-    first_name = ?,
-    last_name = ?,
-    Age = ?,
-    gender = ?,
-    Phone = ?,
-    email = ?,
-    City = ?,
-    Username = ?,
-    ip_address = ?,
-    Language = ?,
-    CreditCardType = ?,
-    CreditCardNumber = ?,
-    OrdersPerMonths = ?,
-    CustomerLifetimeSpending = ?,
-    PercentProbabilityOfBuyingOnVisit = ?
-    WHERE id = ? `,
-    [ id, first_name, last_name, Age,
-    gender, Phone, email, City, Username, ip_address,
-  Language, CreditCardType, CreditCardNumber, BuyingFrequency ]
-  );
-  }
-
-  delete(table, id)
-  {
-    const idSql = `DELETE FROM ` + table + ` WHERE id = ?`;
-    return this.theData.Run(idSql,[id]);
-  }
 
   getByID(table, id)
   {
